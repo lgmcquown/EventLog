@@ -1,0 +1,79 @@
+import math
+
+ID = 42
+location = [3,4,5]
+energy_MeV = 2.3
+atom_type = {"N_atomic": "1", "m_atomic_kg": 3.344*10**-27}
+reaction_type = 102
+
+last_collision = [8,1,2]
+
+vector = ["a","b","c"]
+
+for n in [0,1,2] :       
+    vector[n]  = location[n]-last_collision[n]
+
+distance  = math.sqrt((vector[0]*vector[0]) +(vector[1]*vector[1]) +(vector[2]*vector[2]))
+
+unit_vector = ["a","b","c"]
+
+for n in [0,1,2] :
+    unit_vector[n] = vector[n]/distance
+
+energy_eV = energy_MeV*1000
+
+EVENT_LOG = {"Particle": ID, "Particle_location": location, "Particle_Direction": unit_vector, "Particle_energy_eV": energy_eV, "Particle_type$
+
+
+set_of_events = [EVENT_LOG]*3
+
+
+ii: I would say that a dictionary would be best for storing all the information about an event. The key:value structure makes labeling 
+things convenient. Though they are not ordered, you can call pieces of the dictionary at will using the key. This makes dictionaries superior
+to lists in this case because, as long as you know the key to a value, you don't have to know which position it occupies. 
+Tuples are uniterable, which is undesireable, and sets are unordered with no good way of calling a particular value.
+Nesting containers inside of dictionaries makes for neatly organized data structures. 
+
+iii: I would choose a list for many events. Lists can be appended and extended, and subelements of lists can be called at will. 
+this makes them better than tuples. sets are difficult to draw data out of, and a dictionary would be too unwieldy. 
+
+iv: 
+   A) energy difference between event 5 and event 6
+
+
+Energy_Difference = set_of_events[6]['Energy_eV'] - set_of_events[5]['Energy_eV']
+
+
+   B) the distance between events 7 and 8
+
+
+Position_Change = [0,0,0]
+for n in [0,1,2] :
+    Position_Change[n] = set_of_events[8]['Position'][n] - set_of_events[7]['position'][n]
+Distance = math.sqrt( (Position_Change[0])*(Position_Change[0]) + (Position_Change[1])*(Position_Change[1])
++ (Position_Change[2])*(Position_Change[2]))
+
+
+C) alignment with the z axis of 4 and 9
+
+
+z_component4 = Set_of_events[4]["Particle_Direction][2]
+z_component9 = Set_of_events[9]["Particle_Direction][2]
+
+Position_Change4 = [0,0,0]
+for n in [0,1,2] :
+    Position_Change[n] = set_of_events[4]['Position'][n] - set_of_events[3]['position'][n]
+Distance4 = math.sqrt( (Position_Change[0])*(Position_Change[0]) + (Position_Change[1])*(Position_Change[1])
++ (Position_Change[2])*(Position_Change[2]))
+
+Position_Change9 = [0,0,0]
+for n in [0,1,2] :
+    Position_Change[n] = set_of_events[4]['Position'][n] - set_of_events[3]['position'][n]
+Distance9 = math.sqrt( (Position_Change[0])*(Position_Change[0]) + (Position_Change[1])*(Position_Change[1])
++ (Position_Change[2])*(Position_Change[2]))
+
+z_alignment4 = z_component4/Distance4
+z_alignment9 = z_component9/Distance9
+
+if z_alignment4 > z_alignment9 :
+   print("9 is more aligned with the z axis than 4")
